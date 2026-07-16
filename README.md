@@ -46,7 +46,7 @@
 ## 📫 Контакты
 
 - GitHub: [LeS-csharp](https://github.com/LeS-csharp)
-- telegramm: @BtwCharp
+- telegram: @BtwCharp
 - gmail: savinlev2011@gmail.com
 
 ---
