@@ -36,7 +36,7 @@
 | 4 | **Список задач (To-Do)** | Управление задачами с фильтрацией и приоритетами | WinForms, JSON, LINQ | 🔜 Планируется |
 | 5 | **Библиотека (API)** | REST API для управления книгами и авторами | ASP.NET Core, SQLite, EF Core | 🔜 Планируется |
 | 6 | **Личный дневник** | WinForms-приложение с поиском по датам и тегам | WinForms, JSON, DateTime | 🔜 Планируется |
-| 7 | **EuropePlanner** | Умный планировщик с ИИ-помощником и норвежским стилем | ASP.NET Core, React/Blazor, Docker, xUnit, AI | 🔜 Планируется |
+| 7 | **EuropePlanner** | Умный планировщик с ИИ-помощником и приятным стилем | ASP.NET Core, React/Blazor, Docker, xUnit, AI | 🔜 Планируется |
 
 ---
 
