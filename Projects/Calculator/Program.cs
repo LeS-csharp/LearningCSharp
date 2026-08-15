@@ -1,4 +1,4 @@
-// НАПИСАЛ 3 ВЕРСИЮ, ДОБАВИЛ МЕНЮ И УЛУЧШИЛ ИНТЕРФЕЙС
+// 4 ВЕРСИЯ - 4TH VERSION
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -17,54 +17,75 @@ namespace GitWork
         {
             Enter enter = new Enter();
             enter.Start();
-            enter.CAlculator();
         }
     }
 
     class Enter
     {
+        static Operations operations = new Operations();
         public void Start()
         {
+            Console.Clear();
             Console.WriteLine("Выберите:");
             Console.WriteLine("1. Калькулятор");
             Console.WriteLine("2. История вычислений");
             Console.WriteLine();
-            if (Console.ReadLine() == "1") { CAlculator(); }
-            else if (Console.ReadLine() == "2") { History(); }
+
+            string text = Console.ReadLine();
+            if (text == "1") { CAlculator(); }
+            else if (text == "2") { History(); }
+            else {Start(); }
         }
 
         public void CAlculator()
         {
             Console.Clear();
-            Console.WriteLine("Введите операцию типа [x - y]");
+            Console.WriteLine("Введите операцию типа [x - y] или \"BACK\" чтобы перейти в меню");
             Calculator solution = new Calculator();
             solution.StrToNums();
         }
 
         public void History()
         {
+            
         }
     }
     class Operations
     {
+        Enter enter = new Enter();
+
         public void Plus(double Fn, double Sn)
         {
-            Console.WriteLine($"{Fn} + {Sn} = {Fn+Sn}");
+            Console.WriteLine($"{Fn} + {Sn} = {Fn + Sn}");
+            Return(Fn + Sn);
         }
 
         public void Minus(double Fn, double Sn)
         {
             Console.WriteLine($"{Fn} - {Sn} = {Fn - Sn}");
+            Return(Fn - Sn);
         }
 
         public void Multiply(double Fn, double Sn)
         {
             Console.WriteLine($"{Fn} * {Sn} = {Fn * Sn}");
+            Return(Fn * Sn);
         }
 
         public void Divide(double Fn, double Sn)
         {
             Console.WriteLine(Sn == 0 ? "Не получится)" : $"{ Fn} / {Sn} = {Fn / Sn}");
+            Return(Fn / Sn);
+        }
+
+        private void Return(double result)
+        {
+            Console.WriteLine("Нажмите любую клавишу чтобы сохранить результат...");
+            Console.ReadKey();
+
+
+            Console.Clear();
+            enter.CAlculator();
         }
     }
 
@@ -74,51 +95,78 @@ namespace GitWork
         double Sn;
         string allPath;
         string[] paths;
+        Operations oper = new Operations();
+        Enter enter = new Enter();
+
+        private double[] ToOper(string[] paths)
+        {
+            double[] result;
+
+            if (paths.Length > 1 && double.TryParse(paths[0], out Fn) && double.TryParse(paths[1], out Sn))
+            {
+                result = new double[] {Fn, Sn};
+                return result;
+            }
+
+            else
+            {
+                return null;
+            }
+        }
+
         public void StrToNums()
         {
             allPath = Console.ReadLine();
-            Operations oper = new Operations();
-            Enter enter = new Enter();
 
             if (allPath.Contains("+"))
             {
                 paths = allPath.Split('+');
-                Fn = Convert.ToDouble(paths[0]);
-                Sn = Convert.ToDouble(paths[1]);
-                oper.Plus(Fn, Sn);
+                double[] nums = ToOper(paths);
+                if (nums == null) { Console.WriteLine("Операция не найдена"); Return(); }
+                else { oper.Plus(nums[0], nums[1]); }
             }
 
             else if (allPath.Contains("-"))
             {
                 paths = allPath.Split('-');
-                Fn = Convert.ToDouble(paths[0]);
-                Sn = Convert.ToDouble(paths[1]);
-                oper.Minus(Fn, Sn);
+                double[] nums = ToOper(paths);
+                if (nums == null) { Console.WriteLine("Операция не найдена"); Return(); }
+                else { oper.Minus(nums[0], nums[1]); }
             }
 
             else if (allPath.Contains("*"))
             {
                 paths = allPath.Split('*');
-                Fn = Convert.ToDouble(paths[0]);
-                Sn = Convert.ToDouble(paths[1]);
-                oper.Multiply(Fn, Sn);
+                double[] nums = ToOper(paths);
+                if (nums == null) { Console.WriteLine("Операция не найдена"); Return(); }
+                else { oper.Multiply(nums[0], nums[1]); }
             }
 
             else if (allPath.Contains("/"))
             {
                 paths = allPath.Split('/');
-                Fn = Convert.ToDouble(paths[0]);
-                Sn = Convert.ToDouble(paths[1]);
-                oper.Divide(Fn, Sn);
+                double[] nums = ToOper(paths);
+                if (nums == null) { Console.WriteLine("Операция не найдена"); Return(); }
+                else { oper.Divide(nums[0], nums[1]); }
             }
+
+            else if (allPath == "BACK")
+            {
+                enter.Start();
+            }
+
             else 
             { 
                 Console.WriteLine("Операция не найдена");
+                Return();
             }
-            Console.WriteLine("Нажмите любую клавишу чтобы перейти в меню...");
+        }
+
+        private void Return()
+        {
             Console.ReadKey();
             Console.Clear();
-            enter.Start();
+            enter.CAlculator();
         }
     }
 }
