@@ -1,4 +1,5 @@
-// 4 ВЕРСИЯ - 4TH VERSION
+// 5 ВЕРСИЯ - 5TH VERSION
+
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace GitWork
 
             string text = Console.ReadLine();
             if (text == "1") { CAlculator(); }
-            else if (text == "2") { History(); }
+            else if (text == "2") { Historyth(); }
             else {Start(); }
         }
 
@@ -45,11 +46,46 @@ namespace GitWork
             solution.StrToNums();
         }
 
-        public void History()
+        public void Historyth()
         {
-            
+            Console.Clear();
+            History.ShowEX();
         }
     }
+
+    class History
+    {
+        private static List<double> exmplars = new List<double>(); // ← static
+
+        public static void AddReslt(double ex)  // ← static
+        {
+            exmplars.Add(ex);
+        }
+
+        public static void ShowEX()  // ← static
+        {
+            Console.Clear();
+            if (exmplars.Count > 0)
+            {
+                Console.WriteLine("=== ИСТОРИЯ ВЫЧИСЛЕНИЙ ===\n");
+                for (int i = 0; i < exmplars.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {exmplars[i]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("История пуста. Вычислите что-нибудь");
+            }
+
+            Console.WriteLine("\nНажмите любую клавишу чтобы вернуться в меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Enter enter = new Enter();
+            enter.Start();
+        }
+    }
+
     class Operations
     {
         Enter enter = new Enter();
@@ -83,6 +119,7 @@ namespace GitWork
             Console.WriteLine("Нажмите любую клавишу чтобы сохранить результат...");
             Console.ReadKey();
 
+            History.AddReslt(result);
 
             Console.Clear();
             enter.CAlculator();
@@ -164,6 +201,7 @@ namespace GitWork
 
         private void Return()
         {
+            Console.WriteLine("Нажмите любую клавишу чтобы перезагрузить калькулятор...");
             Console.ReadKey();
             Console.Clear();
             enter.CAlculator();
