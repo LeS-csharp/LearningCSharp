@@ -18,6 +18,19 @@
 
 ---
 
+## 📚 План обучения на 3 года (с видеоуроками)
+
+| Блок | Месяцы | Тема | Материал | Ссылка |
+| :---: | :---: | :--- | :--- | :--- |
+| **1** | **1-6** | **Основы C# и ООП** <br> Синтаксис, переменные, методы, классы, наследование, интерфейсы, обработка исключений | Видео: "Understanding C# OOP" | [▶️ Смотреть](https://ironsoftware.com/academy/learn-csharp/understanding-csharp-oop/) |
+| **2** | **7-12** | **WinForms и работа с файлами** <br> События, контролы, DataGridView, BindingList, сериализация JSON | Видео: "C# Lesson 17 — Tournament Form Part 3" | [▶️ Смотреть](https://ironsoftware.com/academy/csharp-application/csharp-lesson-17-tournament-form-part-3/) |
+| **3** | **13-18** | **Базы данных и EF Core** <br> SQL, SQLite, модели, миграции, CRUD | Проект "Pizza Store" | [📂 Репозиторий](https://github.com/kathleenwest/MinimalWebApiEntityFrameworkCoreSQLite) |
+| **4** | **19-24** | **ASP.NET Core Web API** <br> REST API, GET/POST/PUT/DELETE, Swagger, DTO | Проект "Pizza Store" (Web API) | [📂 Репозиторий](https://github.com/kathleenwest/MinimalWebApiEntityFrameworkCoreSQLite) |
+| **5** | **25-30** | **Финальный проект EuropePlanner** <br> Backend + БД + AI (ChatGPT API) | Умный планировщик задач | 🔜 Будет разработан |
+| **6** | **31-36** | **Полировка и документация** <br> Фронтенд, тесты (xUnit), Docker, README, видео-демо | Готовый пакет для поступления | 🔜 Будет разработан |
+
+---
+
 ## 📚 Ресурсы для обучения
 
 - [Microsoft Learn — C#](https://learn.microsoft.com/ru-ru/dotnet/csharp/)
