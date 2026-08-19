@@ -18,9 +18,15 @@ namespace GitWork
             Console.WriteLine("--------------------");
             Console.WriteLine("1-добавить контакт");
             Console.WriteLine("2-удалить контакт");
-            Console.WriteLine("3-найти по названию");
+            Console.WriteLine("3-изменить контакт");
+            Console.WriteLine("4-найти по названию");
             Console.WriteLine("--------------------");
             string input = Console.ReadLine();
+            if (input == "1") {  }
+            else if (input == "1") {  }
+            else if (input == "1") {  }
+            else if (input == "1") {  }
+            else { }
         }
     }
 }
