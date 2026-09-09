@@ -12,13 +12,14 @@ namespace GitWork
 {
     internal class Program
     {
+        static Manager manager = new Manager();
 
         static void Main(string[] args)
         {
             Start();
         }
 
-        static void Start()
+        public static void Start()
         {
             Console.Clear();
             Console.WriteLine("**ТЕЛЕФОННАЯ КНИГА**");
@@ -30,8 +31,6 @@ namespace GitWork
             Console.WriteLine("5-показать список контактов");
             Console.WriteLine("--------------------");
             string input = $"{Console.ReadLine()}";
-
-            Manager manager = new Manager();
 
             switch (input)
             {
@@ -48,66 +47,195 @@ namespace GitWork
     class Manager
     {
         private Dictionary<string, string> phonename = new Dictionary<string, string>();
-        
-        public void Add() 
+
+        public void Add()
         {
-            Console.Clear();//1
+            Console.Clear();
             Console.WriteLine("Введите имя и телефон без пробелов через \"/\" ");
             string input = $"{Console.ReadLine()}";
             string[] NaN;
             int trash;
-            if(input.Contains("/"))
+
+            if (input.Contains("/"))
             {
                 NaN = input.Split('/');
+
                 if (int.TryParse(NaN[1], out trash))
                 {
-                    phonename.Add(NaN[1], NaN[0]);
+                    phonename.Add(NaN[0], NaN[1]);
+                    Returne();
                 }
-                else {Return(1);}
+                else
+                {
+                    WrongReturn(1);
+                }
             }
-            else {Return(1);}
-        }
-        public void Remove() //2
-        {
-            Console.Clear();
-        }
-        public void Rename() //3
-        {
-            Console.Clear();
-        }
-        public void Found() //4
-        {
-            Console.Clear();
-        }
-        public void Show() //5
-        {
-            Console.Clear();
-            foreach (var i in phonename)
+            else
             {
-                Console.WriteLine($"{i.Key} - {i.Value}");
+                WrongReturn(1);
             }
         }
-        private void Return(int method)
+
+        public void Remove()
+        {
+            Console.Clear();
+
+            if (phonename.Count == 0)
+            {
+                Console.WriteLine("Список ваших контактов пустой");
+                Returne();
+            }
+            else
+            {
+                Console.WriteLine("Введите имя контакта для удаления");
+                string input = Console.ReadLine();
+                string trash = "";
+
+                if (phonename.TryGetValue(input, out trash))
+                {
+                    phonename.Remove(input);
+                    Console.WriteLine($"Вы успешно удалили {input} из списка контактов");
+                    Returne();
+                }
+                else
+                {
+                    Console.WriteLine("Не нашли данного контакта в вашем списке.");
+                    Returne();
+                }
+            }
+        }
+
+        public void Rename()
+        {
+            Console.Clear();
+
+            if (phonename.Count == 0)
+            {
+                Console.WriteLine("Список ваших контактов пустой");
+                Returne();
+            }
+            else
+            {
+                Console.WriteLine("Введите имя контакта для изменения");
+                string input = Console.ReadLine();
+                string trash = "";
+
+                if (phonename.TryGetValue(input, out trash))
+                {
+                    Console.WriteLine("Введите новое имя контакта");
+                    string newInput = Console.ReadLine();
+
+                    phonename.Add(newInput, phonename[input]);
+                    phonename.Remove(input);
+
+                    Console.WriteLine($"Вы успешно изменили {input} на {newInput}");
+                    Returne();
+                }
+                else
+                {
+                    Console.WriteLine("Не нашли данного контакта в вашем списке.");
+                    Returne();
+                }
+            }
+        }
+
+        public void Found()
+        {
+            Console.Clear();
+
+            if (phonename.Count == 0)
+            {
+                Console.WriteLine("Список ваших контактов пустой");
+                Returne();
+            }
+            else
+            {
+                Console.WriteLine("Введите имя для поиска контакта");
+                string input = Console.ReadLine();
+                string trash = "";
+
+                if (phonename.TryGetValue(input, out trash))
+                {
+                    Console.WriteLine($"{input} - {trash}");
+                    Returne();
+                }
+                else
+                {
+                    WrongReturn(4);
+                }
+            }
+        }
+
+        public void Show()
+        {
+            Console.Clear();
+
+            if (phonename.Count == 0)
+            {
+                Console.WriteLine("Список ваших контактов пустой");
+                Returne();
+            }
+            else
+            {
+                foreach (var i in phonename)
+                {
+                    Console.WriteLine($"{i.Key} - {i.Value}");
+                }
+
+                Returne();
+            }
+        }
+
+        private void WrongReturn(int method)
         {
             Console.Clear();
             Console.WriteLine("Неверный ввод");
-            switch(method)
+
+            switch (method)
             {
-                case 1:{Add();}
-                break;
-                
-                case 2:{Remove();}
-                break;
-                
-                case 3:{Rename();}
-                break;
-                
-                case 4:{Found();}
-                break;
-                
-                case 5:{Show();}
-                break;
+                case 1:
+                    {
+                        Add();
+                    }
+                    break;
+
+                case 2:
+                    {
+                        Remove();
+                        Console.WriteLine("Обьект не найден, нажмите любую кнопку чтобы вернуться в меню");
+                        Console.ReadKey();
+                    }
+                    break;
+
+                case 3:
+                    {
+                        Rename();
+                        Console.WriteLine("Обьект не найден, нажмите любую кнопку чтобы вернуться в меню");
+                        Console.ReadKey();
+                    }
+                    break;
+
+                case 4:
+                    {
+                        Found();
+                        Console.WriteLine("Обьект не найден, нажмите любую кнопку чтобы вернуться в меню");
+                        Console.ReadKey();
+                    }
+                    break;
+
+                case 5:
+                    {
+                        Show();
+                    }
+                    break;
             }
+        }
+
+        void Returne()
+        {
+            Console.WriteLine("Нажмите любую кнопку чтобы вернуться в меню");
+            Console.ReadKey();
+            Program.Start();
         }
     }
 }
