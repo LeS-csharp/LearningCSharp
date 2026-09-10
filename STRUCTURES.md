@@ -23,3 +23,12 @@ if (a = b)
 }
 
 ---
+int a = 1;
+int b = 2;
+int result = 0;
+Plus(a, b, ref result);
+
+Plus(int a, int b, ref int result)
+{
+    result = a+b; // result in main method = result in "Plus" method
+{
