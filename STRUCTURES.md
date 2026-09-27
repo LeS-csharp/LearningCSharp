@@ -32,3 +32,9 @@ Plus(int a, int b, ref int result)
 {
     result = a+b; // result in main method = result in "Plus" method
 {
+
+---
+public override string ToString()
+{
+    return $"Имя: {name}, Возраст: {age}, Email: {email}";
+}
