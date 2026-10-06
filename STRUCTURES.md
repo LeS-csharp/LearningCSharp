@@ -38,3 +38,14 @@ public override string ToString()
 {
     return $"Имя: {name}, Возраст: {age}, Email: {email}";
 }
+
+---
+___НОД___
+ while (b != 0)
+{
+    long temp = b;
+    b = a % b;
+    a = temp;
+}
+
+Console.WriteLine(a)
